@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Lists elements</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		body{
+			height: 100vh;
+			width: 100vw;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background-color: rgb(22, 150, 150);
+		}
+		.container{
+			color: #e2e2e2;
+		}
+		h1{
+			font-size: 25px;	
+		}
+		.ask{
+			width: 300px;
+			margin: 20px auto;
+			padding: 10px;
+			text-align: center;
+		}
+		h2{
+			color: #fff;
+		}
+		#ok{
+			display: block;
+			padding: 0 50px;
+			font-size: 20px;
+			color: #ffffffab;
+		}
+
+		form{
+			width: 300px;
+			margin: 0 auto;
+			padding: 10px;
+			background-color: #e2e2e2be;
+			border-radius: 10px ;
+			box-shadow: 0px 0px 15px rgba(34, 34, 34, 0.5);
+		}
+		#ans{
+			display: block;
+			margin: 5px;
+			padding: 10px;
+			text-align: center;
+			color: rgb(16, 128, 40);
+			font-size: 18px;
+		}
+		label{
+			margin: 10px;
+			font-size: 20px;
+			font-weight: bold;
+			color: rgb(11, 120, 124);
+		}
+		input{
+			margin: 10px;
+			display: block;
+			width: 260px;
+			height: 25px;
+
+			border: none;
+		}
+		button{
+			padding: 8px 15px;
+			margin: 10px;
+			color: rgb(11, 120, 124);
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+		.hidden{
+			display: none;
+		}
+	</style>
+</head>
+<body>
+
+	<div class="container">
+
+
+		<h1>Example : A function that combines two lists by alternatingly taking elements, e.g. [a,b,c], [1,2,3]</h1>
+
+		<h3 id="result">Result : </h3>
+
+		<div class="ask">
+			<h2>Would you try this?</h2> 
+			<span id="ok"></span>
+			<button id="yes">Yes</button>
+			<button id="no">No</button>
+		</div>
+
+		<form action="" class="modal hidden">
+			<span id="ans"></span>
+			<label for="strValue">List One</label> 
+			<input type="text" id="strValue" autocomplete="off"> 
+
+			<label for="numValue">List Two</label>
+			<input type="text" id="numValue" autocomplete="off">
+
+			<button type="submit" id="btnc">click</button>
+			<button type="submit" id="btn">restart</button>
+		</form>
+	</div>
+
+	<script type="text/javascript">
+
+		// example formate
+		let funcList = () => {
+			let array1 = ['a','b','c'];
+			let array2 = [1,2,3];
+			let a = 0, b = 0;
+			let result = [];
+			for(let i = 0; i < array1.length+array2.length; i++){
+				let r = (i%2 === 0)? result[i]= array1[a++] : result[i] = array2[b++];
+				// console.log(r);
+			}
+			return result;
+		}
+		document.getElementById('result').innerHTML += "[" + funcList() + "]";
+
+		//__________________________________________________________________________
+
+		let modal = document.querySelector('.modal');
+		let yesBtn = document.getElementById('yes');
+		let noBtn = document.getElementById('no');
+
+		yesBtn.addEventListener('click', ()=>{
+			document.getElementById('ok').innerHTML = "Now let's get started...";
+			modal.classList.remove('hidden');
+		});
+
+		let position;
+		noBtn.addEventListener('mouseover',()=>{
+			position 
+			? (position = 0) 
+			: (position = 100);
+			noBtn.style.transform = `translate(${position}px,0px)`
+			noBtn.style.transition = "all 0.3s ease";
+		})
+
+		
+
+		let listStr = document.getElementById('strValue');
+		let listNum = document.getElementById('numValue');
+		let btnc = document.getElementById('btnc');
+
+		btnc.addEventListener('click',(e) => {
+			e.preventDefault();
+			
+			let listOne = listStr.value;
+			let arr1 = listOne.split('');
+
+			let listTwo = listNum.value;
+			let arr2 = listTwo.split('');
+
+			let length = arr1.length+arr2.length;
+			let value = [];
+			let x = 0, y = 0;
+			for(let i = 0; i < length; i++){
+				(i%2 === 0) 
+				? value[i] = arr1[x++] 
+				: value[i] = arr2[y++]
+ 			};
+			document.getElementById('ans').innerHTML = "[" +value + "]";
+		});
+
+		let btn = document.getElementById('btn');
+		btn.addEventListener('click',()=>{
+			window.location.reload("Refresh");
+		});
+
+
+		// Write a function that combines two lists by alternatingly taking elements, e.g. [a,b,c], [1,2,3] → [a,1,b,2,c,3].
+
+	</script>
+
+</body>
+</html>
